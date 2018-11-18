@@ -33,7 +33,7 @@ export default class App extends Component<{}> {
     if (!this.state.user) {
       return (
         <View style={styles.container}>
-          <GoogleSigninButton style={{width: 120, height: 44}} color={GoogleSigninButton.Color.Light} size={GoogleSigninButton.Size.Icon} onPress={() => { this._signIn(); }}/>
+          <GoogleSigninButton style={{width: 240, height: 74,backgroundColor:'#137BBA'}} color={GoogleSigninButton.Color.Light} size={GoogleSigninButton.Size.Icon} onPress={() => { this._signIn(); }}/>
         </View>
       );
     }
@@ -59,7 +59,7 @@ export default class App extends Component<{}> {
       await GoogleSignin.hasPlayServices({ autoResolve: true });
       await GoogleSignin.configure({
         webClientId: '1068112920550-vd21f5li9vnvllh3t7tl5m04unq70e64.apps.googleusercontent.com',
-        offlineAccess: false
+        offlineAccess: false   
       });
 
       const user = await GoogleSignin.currentUserAsync();
@@ -96,6 +96,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#137BBA',
   },
 });

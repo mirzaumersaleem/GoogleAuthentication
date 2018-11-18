@@ -96,8 +96,16 @@ def enableProguardInReleaseBuilds = false
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
-
-    defaultConfig {
+    signingConfigs {
+            release {
+                if(project.hasProperty('MYAPP_RELEASE_STORE_FILE')){
+                    storeFile file(MYAPP_RELEASE_STORE_FILE)
+                    storePassword MYAPP_RELEASE_STORE_PASSWORD
+                    keyAlias MYAPP_RELEASE_KEY_ALIAS
+                    keyPassword MYAPP_RELEASE_KEY_PASSWORD
+                }
+            }
+    defaultConfig { 
         applicationId "com.authentication"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
@@ -106,6 +114,9 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
+    }
+     lintOptions {
+       disable 'MissingTranslation'
     }
     splits {
         abi {
@@ -152,4 +163,5 @@ dependencies {
 task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
+}
 }
